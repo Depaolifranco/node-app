@@ -32,9 +32,9 @@ router.post('/users/login', async (req, res) => {
 
 router.post('/users/logout', auth, async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter((token) => token.token !== req.token)
-    await req.user.save()
-    res.send()
+    req.user.tokens = req.user.tokens.filter((token) => token.token !== req.token);
+    await req.user.save();
+    res.send();
   } catch (error) {
     res.status(500).send(error);
   }
@@ -42,9 +42,9 @@ router.post('/users/logout', auth, async (req, res) => {
 
 router.post('/users/logoutall', auth, async (req, res) => {
   try {
-    req.user.tokens = []
-    await req.user.save()
-    res.send()
+    req.user.tokens = [];
+    await req.user.save();
+    res.send();
   } catch (error) {
     res.status(500).send(error);
   }
@@ -57,7 +57,7 @@ router.patch('/users/me', auth, async (req, res) => {
 
   if (isValidOperation) {
     try {
-      updates.forEach((pair) => req.user[pair] = req.body[pair]);
+      updates.forEach((pair) => (req.user[pair] = req.body[pair]));
       await req.user.save();
       res.send(req.user);
     } catch (error) {
@@ -68,13 +68,13 @@ router.patch('/users/me', auth, async (req, res) => {
   }
 });
 
-router.delete('/users', auth, async (req,res) => {
+router.delete('/users', auth, async (req, res) => {
   try {
-    await req.user.remove()
-    res.send(req.user)
+    await req.user.remove();
+    res.send(req.user);
   } catch (error) {
-    res.status(500).send
+    res.status(500).send;
   }
-})
+});
 
 module.exports = router;

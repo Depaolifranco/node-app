@@ -6,13 +6,20 @@
   "scripts": {
     "start": "node src/index.js",
     "inspect": "nodemon --inspect-brk src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "export NODE_ENV=&&nodemon src/index.js",
+    "test": "export NODE_ENV=test&&nodemon src/index.js",
+    "jest": "export NODE_ENV=test&&jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^9.0.0",
+    "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.5",
@@ -20,9 +27,14 @@
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.20.2",
-    "nodemon": "^2.0.2"
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.2",
+    "prettier": "2.2.1",
+    "supertest": "^6.1.3"
   }
 }
