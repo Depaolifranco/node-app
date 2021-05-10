@@ -99,7 +99,7 @@ test('Should not update user data because of invalid parameter', async () => {
     .send({
       email: 'fdepaoli@laborcorporativa.com.ar',
       name: 'Franco',
-      perrito: 'Guau',
+      location: 'Buenos Aires',
     })
     .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
     .expect(400);
