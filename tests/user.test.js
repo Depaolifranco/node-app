@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = require('../src/app');
 const User = require('../src/models/user');
 const jwt = require('jsonwebtoken');
-const { jwtSecret } = require('../configs/configs')();
+const { jwtSecret } = require('../configs/configs');
 
 const userOneId = new mongoose.Types.ObjectId();
 const userOneSecondDeviceId = new mongoose.Types.ObjectId();
@@ -93,7 +93,7 @@ test('Should update user data', async () => {
   expect(response.body.name).toBe('Franco');
 });
 
-test('Should not update user data because of invalid data', async () => {
+test('Should not update user data because of invalid parameter', async () => {
   await request(app)
     .patch('/users/me')
     .send({

@@ -1,42 +1,42 @@
 const express = require('express');
-const Task = require('../models/task');
+const Vacancy = require('../models/vacancy');
 const auth = require('../middleware/auth');
 
 const router = new express.Router();
 
-router.post('/tasks', async (req, res) => {
+router.post('/vacancies', async (req, res) => {
   try {
-    const task = new Task(req.body);
-    await task.save();
-    res.status(201).send(task);
+    const vacancy = new Vacancy(req.body);
+    await vacancy.save();
+    res.status(201).send(vacancy);
   } catch (error) {
     res.status(400).send(error);
   }
 });
 
-router.get('/tasks', async (req, res) => {
+router.get('/vacancies', async (req, res) => {
   try {
-    const tasks = await Task.find({});
-    res.send(tasks);
+    const vacancies = await Vacancy.find({});
+    res.send(vacancies);
   } catch (error) {
     res.status(500).send();
   }
 });
 
-router.get('/tasks/:id', async (req, res) => {
+router.get('/vacancies/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const task = await Task.findById(id);
-    if (!task) {
+    const vacancy = await Vacancy.findById(id);
+    if (!vacancy) {
       res.status(404).send();
     }
-    res.send(task);
+    res.send(vacancy);
   } catch (error) {
     res.status(500).send();
   }
 });
 
-router.patch('/tasks/:id', async (req, res) => {
+router.patch('/vacancies/:id', async (req, res) => {
   const updates = Object.keys(req.body);
   const validUpdates = ['description', 'completed'];
   const isValidOperation = updates.every((key) => validUpdates.includes(key));
@@ -44,11 +44,11 @@ router.patch('/tasks/:id', async (req, res) => {
   if (isValidOperation) {
     try {
       const { id } = req.params;
-      const task = await Task.findById(id);
+      const vacancy = await Vacancy.findById(id);
       updates.forEach((element) => {
-        task[element] = req.body[element];
+        vacancy[element] = req.body[element];
       });
-      const response = await task.save();
+      const response = await vacancy.save();
       if (!response) {
         res.status(404).send();
       }
@@ -61,10 +61,10 @@ router.patch('/tasks/:id', async (req, res) => {
   }
 });
 
-router.delete('/tasks/:id', async (req, res) => {
+router.delete('/vacancies/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await Task.findByIdAndDelete(id);
+    const user = await Vacancy.findByIdAndDelete(id);
     if (!user) {
       res.status(404).send();
     }

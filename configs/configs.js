@@ -1,4 +1,4 @@
-module.exports = () => ({
+module.exports = {
   application: {
     name: process.env.APP_NAME,
     port: process.env.APP_PORT || 3000,
@@ -13,4 +13,4 @@ module.exports = () => ({
     password: process.env.MONGO_PASSWORD,
   },
   jwtSecret: process.env.JWT_SECRET,
-});
+};
